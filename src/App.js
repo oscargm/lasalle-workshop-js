@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./App.css";
-import { ChuckNorrisJokes } from "./pages/chuck-norris.component";
+import { ChuckNorrisQuotes } from "./pages/chuck-norris.component";
 import { Kittens } from "./pages/kittens.component";
 const pages = ["chuck-norris", "kittens"];
 
@@ -26,7 +26,7 @@ function App() {
         </select>
       </div>
       <div>
-        {selectedPage === pages[0] ? <ChuckNorrisJokes /> : <Kittens />}
+        {selectedPage === pages[0] ? <ChuckNorrisQuotes /> : <Kittens />}
       </div>
     </div>
   );
