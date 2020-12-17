@@ -1,34 +1,32 @@
 import * as React from "react";
 import "./App.css";
-import { ChuckNorrisJokes } from "./pages/chuck-norris.jokes";
-
+import { ChuckNorrisJokes } from "./pages/chuck-norris.component";
+import { Kittens } from "./pages/kittens.component";
 const pages = ["chuck-norris", "kittens"];
 
 function App() {
   const [selectedPage, setSelectedPage] = React.useState(pages[0]);
   const optionChangeHandler = (event) => {
-    setSelectedPage(event.target.value);
+    console.log("event", event.target.value);
+    setSelectedPage(pages[event.target.value]);
   };
+
+  React.useEffect(() => {
+    console.log("selectedValue", selectedPage, pages);
+  }, [selectedPage]);
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <select onChange={optionChangeHandler}>
-        {pages.map((page, pageIndex) => (
-          <option
-            value={pageIndex}
-            key={`page-${pageIndex}`}
-            selected={page === selectedPage}
-          >
-            {page}
-          </option>
-        ))}
-      </select>
       <div>
-        {selectedPage === pages[0] ? (
-          <ChuckNorrisJokes />
-        ) : (
-          <span>Kittens</span>
-        )}
+        <select onChange={optionChangeHandler} value={selectedPage}>
+          {pages.map((page, pageIndex) => (
+            <option value={pageIndex} key={`page-${pageIndex}`}>
+              {page}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        {selectedPage === pages[0] ? <ChuckNorrisJokes /> : <Kittens />}
       </div>
     </div>
   );
