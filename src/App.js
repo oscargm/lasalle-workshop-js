@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import { ChuckNorrisJokes } from "./pages/chuck-norris.jokes";
+
+const pages = ["chuck-norris", "kittens"];
 
 function App() {
+  const [selectedPage, setSelectedPage] = React.useState(pages[0]);
+  const optionChangeHandler = (event) => {
+    setSelectedPage(event.target.value);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
+      <select onChange={optionChangeHandler}>
+        {pages.map((page, pageIndex) => (
+          <option
+            value={pageIndex}
+            key={`page-${pageIndex}`}
+            selected={page === selectedPage}
+          >
+            {page}
+          </option>
+        ))}
+      </select>
+      <div>
+        {selectedPage === pages[0] ? (
+          <ChuckNorrisJokes />
+        ) : (
+          <span>Kittens</span>
+        )}
+      </div>
     </div>
   );
 }
